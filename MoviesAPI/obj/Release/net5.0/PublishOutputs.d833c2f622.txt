@@ -1,0 +1,11 @@
+D:\MoviesAPI\out\MoviesAPI.exe
+D:\MoviesAPI\out\appsettings.Development.json
+D:\MoviesAPI\out\appsettings.json
+D:\MoviesAPI\out\MoviesAPI.dll
+D:\MoviesAPI\out\MoviesAPI.deps.json
+D:\MoviesAPI\out\MoviesAPI.runtimeconfig.json
+D:\MoviesAPI\out\MoviesAPI.pdb
+D:\MoviesAPI\out\Microsoft.OpenApi.dll
+D:\MoviesAPI\out\Swashbuckle.AspNetCore.Swagger.dll
+D:\MoviesAPI\out\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\MoviesAPI\out\Swashbuckle.AspNetCore.SwaggerUI.dll
