@@ -27,11 +27,6 @@ steps:
     version: '5.0.x'
     includePreviewVersions: true # Required for preview versions
 
-- task: UseDotNet@2
-  inputs:
-    version: '3.0.x'
-    packageType: runtime
-
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
@@ -50,4 +45,4 @@ steps:
     azureSubscription: 'Azure for Students (9943dac9-1c43-456c-ad19-39dfd56251b1)'
     appType: 'webApp'
     WebAppName: 'MoviesAPI20211202165531'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    packageForLinux: '$(build.artifactStagingDirectory)\WebApp.zip'
