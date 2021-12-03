@@ -37,7 +37,7 @@ namespace MoviesAPI.Controllers
             return Ok(movie);
         }
 
-        [HttpGet("test/test")]
+        [HttpGet("test")]
         public IActionResult TestingThisMF()
         {
             return Ok(new String("IS THIS WORKING?"));
