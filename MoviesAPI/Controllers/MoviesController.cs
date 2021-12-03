@@ -36,5 +36,11 @@ namespace MoviesAPI.Controllers
             var movie = _userService.GetAMovieAccordingToID(id);
             return Ok(movie);
         }
+
+        [HttpGet("test/test")]
+        public IActionResult TestingThisMF()
+        {
+            return Ok(new String("IS THIS WORKING?"));
+        }
     }
 }
