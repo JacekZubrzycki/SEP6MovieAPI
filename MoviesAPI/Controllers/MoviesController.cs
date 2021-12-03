@@ -101,5 +101,11 @@ namespace MoviesAPI.Controllers
         {
             return _userService.GetPersonByName(name);
         }
+
+        [HttpGet("test")]
+        public IActionResult TestingThisMF()
+        {
+            return Ok(new String("IS THIS WORKING?"));
+        }
     }
 }
