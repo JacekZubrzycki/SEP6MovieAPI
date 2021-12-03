@@ -18,6 +18,12 @@ steps:
 
 
 steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+    
 - task: UseDotNet@2
   inputs:
     version: '5.0.x'
