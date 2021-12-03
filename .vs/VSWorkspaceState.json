@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\MoviesAPI",
+    "\\MoviesAPI\\Controllers",
+    "\\MoviesAPI\\Helpers",
+    "\\MoviesAPI\\Models",
+    "\\MoviesAPI\\Services"
   ],
-  "SelectedNode": "\\README.md",
   "PreviewInSolutionExplorer": false
 }

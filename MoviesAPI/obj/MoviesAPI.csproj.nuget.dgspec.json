@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\semin\\Desktop\\SEP6\\MoviesAPI\\MoviesAPI.csproj": {}
+    "C:\\Users\\endri\\Documents\\GitHub\\VR1-MIX\\SEP6MovieAPI\\MoviesAPI\\MoviesAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\semin\\Desktop\\SEP6\\MoviesAPI\\MoviesAPI.csproj": {
+    "C:\\Users\\endri\\Documents\\GitHub\\VR1-MIX\\SEP6MovieAPI\\MoviesAPI\\MoviesAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\semin\\Desktop\\SEP6\\MoviesAPI\\MoviesAPI.csproj",
+        "projectUniqueName": "C:\\Users\\endri\\Documents\\GitHub\\VR1-MIX\\SEP6MovieAPI\\MoviesAPI\\MoviesAPI.csproj",
         "projectName": "MoviesAPI",
-        "projectPath": "C:\\Users\\semin\\Desktop\\SEP6\\MoviesAPI\\MoviesAPI.csproj",
-        "packagesPath": "C:\\Users\\semin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\semin\\Desktop\\SEP6\\MoviesAPI\\obj\\",
+        "projectPath": "C:\\Users\\endri\\Documents\\GitHub\\VR1-MIX\\SEP6MovieAPI\\MoviesAPI\\MoviesAPI.csproj",
+        "packagesPath": "C:\\Users\\endri\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\endri\\Documents\\GitHub\\VR1-MIX\\SEP6MovieAPI\\MoviesAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\semin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\endri\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

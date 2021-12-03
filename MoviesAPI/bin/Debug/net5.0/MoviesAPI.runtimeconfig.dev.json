@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "C:\\Users\\semin\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\semin\\.nuget\\packages"
+      "C:\\Users\\endri\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\endri\\.nuget\\packages"
     ]
   }
 }

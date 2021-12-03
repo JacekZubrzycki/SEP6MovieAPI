@@ -22,6 +22,15 @@ namespace MoviesAPI.Helpers
             options.UseMySql(Configuration["ConnectionStrings:Database"], MySqlServerVersion.LatestSupportedServerVersion);
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Director>().ToTable("directors", t => t.ExcludeFromMigrations());
+        }
+
+        public DbSet<Director> directors { get; set; }
         public DbSet<Movie> movies { get; set; }
+        public DbSet<Person> people { get; set; }
+        public DbSet<Ratings> ratings { get; set; }
+        public DbSet<Star> stars { get; set; }
     }
 }

@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace MoviesAPI.Models
 {
-    public class Movie
+    public class Person
     {
         [Key]
         public int Id { get; set; }
-        public string Title { get; set; }
-        public int Year { get; set; }
+        public string Name { get; set; }
+        public int Birth { get; set; }
     }
 }
+
+
