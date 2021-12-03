@@ -1,4 +1,5 @@
 # ASP.NET Core (.NET Framework)
+
 # Build and test ASP.NET Core projects targeting the full .NET Framework.
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
@@ -42,3 +43,11 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure for Students (9943dac9-1c43-456c-ad19-39dfd56251b1)'
+    appType: 'webApp'
+    WebAppName: 'MoviesAPI20211202165531'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
