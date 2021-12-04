@@ -67,5 +67,6 @@ stages:
         azureSubscription: 'Azure for Students (9943dac9-1c43-456c-ad19-39dfd56251b1)'
         appType: 'webApp'
         appName: 'MoviesAPISep6'
+        resourceGroupName: 'SEP6'
         package: '$(System.ArtifactsDirectory)/**/*.zip'
         deploymentMethod: 'zipDeploy'
