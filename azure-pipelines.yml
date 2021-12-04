@@ -11,7 +11,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/*.sln'
+  solution: 'MoviesAPI/MoviesAPI.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
