@@ -70,5 +70,6 @@ stages:
         appType: 'webApp'
         ResourceGroupName: 'SEP6'
         WebAppName: 'MoviesAPISep6'
+        DeploymentType: zipDeploy
         packageForLinux: '$(System.ArtifactsDirectory)/**/*.zip'
 
