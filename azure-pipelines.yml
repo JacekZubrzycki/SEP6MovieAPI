@@ -69,4 +69,4 @@ stages:
         azureSubscription: 'Azure for Students (9943dac9-1c43-456c-ad19-39dfd56251b1)'
         appType: 'webApp'
         WebAppName: 'MoviesAPISep6'
-        packageForLinux: '$(System.ArtifactsDirectory)/**/*.zip'
+        packageForLinux: '$(System.ArtifactsDirectory)/drop/*.zip'
