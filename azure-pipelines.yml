@@ -62,12 +62,10 @@ stages:
         downloadType: 'single'
         downloadPath: '$(System.ArtifactsDirectory)'
         artifactName: 'drop'
-
-    - task: AzureRmWebAppDeployment@4
+    - task: AzureWebApp@1
       inputs:
-        ConnectionType: 'AzureRM'
         azureSubscription: 'Azure for Students (9943dac9-1c43-456c-ad19-39dfd56251b1)'
         appType: 'webApp'
-        WebAppName: 'MoviesAPISep6'
-        ResourceGroupName: 'SEP6'
-        packageForLinux: '$(System.ArtifactsDirectory)/drop/*.zip'
+        appName: 'MoviesAPISep6'
+        package: '$(System.ArtifactsDirectory)/**/*.zip'
+        deploymentMethod: 'zipDeploy'
