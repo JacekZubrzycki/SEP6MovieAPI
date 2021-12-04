@@ -11,5 +11,6 @@
     <WebStackScaffolding_DbContextTypeFullName>MoviesAPI.Helpers.DBContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_IsViewGenerationSelected>False</WebStackScaffolding_IsViewGenerationSelected>
+    <NameOfLastUsedPublishProfile>C:\Users\semin\Desktop\SEP6\.github\workflows\MoviesAPISep6.yml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
