@@ -7,6 +7,12 @@
 trigger:
 - main
 
+
+stages:
+ - stage: Build
+   jobs:
+   - job: Build
+
 pool:
   vmImage: 'windows-latest'
 
@@ -38,16 +44,29 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-
-- task: DotNetCoreCLI@2
+- task: PublishBuildArtifacts@1
   inputs:
-    command: publish
-    publishWebProjects: True
-    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    zipAfterPublish: True
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
 
-# this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
-- task: PublishPipelineArtifact@1
+
+- stage: Deploy
+  jobs:
+   - job: Deploy
+     pool:
+       vmImage: 'windows-latest'
+     steps:
+     - task: DownloadBuildArtifacts@1
+       inputs:
+         buildType: 'current'
+         downloadType: 'single'
+         downloadPath: '$(System.ArtifactsDirectory)'
+         artifactName: 'drop'
+- task: AzureRmWebAppDeployment@4
   inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)' 
-    artifactName: 'MoviesAPI'
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure for Students (9943dac9-1c43-456c-ad19-39dfd56251b1)'
+    appType: 'webApp'
+    WebAppName: 'MoviesAPISep6'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
