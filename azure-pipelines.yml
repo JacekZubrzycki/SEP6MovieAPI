@@ -55,6 +55,6 @@ steps:
 - task: AzureWebApp@1
   inputs:
     appType: webApp
-    azureSubscription: 'Azure for Students'
+    azureSubscription: "285039"
     appName: 'MoviesAPI'
     package: $(System.DefaultWorkingDirectory)/**/*.zip   
