@@ -51,10 +51,3 @@ steps:
   inputs:
     targetPath: '$(Build.ArtifactStagingDirectory)' 
     artifactName: 'MoviesAPI'
-    
-- task: AzureWebApp@1
-  inputs:
-    appType: webApp
-    azureSubscription: "Azure for Students"
-    appName: 'MoviesAPI'
-    package: $(System.DefaultWorkingDirectory)/**/*.zip   
