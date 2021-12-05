@@ -51,12 +51,14 @@ namespace MoviesAPI.Services
 
         public Director GetDirectorByMovieID(int movie_id)
         {
-            return _context.directors.Find(movie_id);
+            Director director = _context.directors.Where(s => s.Movie_id == movie_id).FirstOrDefault<Director>();
+            return director;
         }
 
         public Director GetDirectorByPersonID(int person_id)
         {
-            return _context.directors.Find(person_id);
+            Director director = _context.directors.Where(s => s.Person_id == person_id).FirstOrDefault<Director>();
+            return director;
         }
 
         public Person GetPersonByID(int id)
@@ -66,22 +68,26 @@ namespace MoviesAPI.Services
 
         public Person GetPersonByName(string name)
         {
-            return _context.people.Find(name);
+            Person person = _context.people.Where(s => s.Name == name).FirstOrDefault<Person>();
+            return person;
         }
 
         public Ratings GetRatingByMovieID(int id)
         {
-            return _context.ratings.Find(id);
+            Ratings rating = _context.ratings.Where(s => s.Movie_id == id).FirstOrDefault<Ratings>();
+            return rating;
         }
 
         public Star GetStarByMovieID(int movie_id)
         {
-            return _context.stars.Find(movie_id);
+            Star star = _context.stars.Where(s => s.Movie_id == movie_id).FirstOrDefault<Star>();
+            return star;
         }
 
         public Star GetStarByPersonID(int person_id)
         {
-            return _context.stars.Find(person_id);
+            Star star = _context.stars.Where(s => s.Person_id == person_id).FirstOrDefault<Star>();
+            return star;
         }
     }
 }
