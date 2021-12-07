@@ -32,5 +32,6 @@ namespace MoviesAPI.Helpers
         public DbSet<Person> people { get; set; }
         public DbSet<Ratings> ratings { get; set; }
         public DbSet<Star> stars { get; set; }
+        public DbSet<User> users { get; set; }
     }
 }

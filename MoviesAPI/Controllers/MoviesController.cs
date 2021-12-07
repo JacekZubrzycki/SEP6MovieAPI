@@ -1,10 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using MoviesAPI.Helpers;
 using MoviesAPI.Models;
 using MoviesAPI.Services;
@@ -12,100 +19,94 @@ using MoviesAPI.Services;
 namespace MoviesAPI.Controllers
 {
     [ApiController]
-    [Route("ctrn")]
+    [Route("[controller]")]
     public class MoviesController : ControllerBase
     {
-        private readonly DBContext _context;
         private readonly IUserService _userService;
-        
-        public MoviesController(IUserService userService, DBContext context)
+        private readonly AppSettings _appSettings;
+        private readonly IMapper _mapper;
+
+        public MoviesController(IUserService userService, IMapper mapper, IOptions<AppSettings> appSettings)
         {
-            _context = context;
             _userService = userService;
+            _appSettings = appSettings.Value;
+            _mapper = mapper;
         }
-
-        [HttpGet("GetAllMovies")]
-        public List<Movie> GetAllMovies()
-        {
-            return _userService.GetAllMovies();
-        }
-
+        [Authorize(Roles = "User")]
         [HttpGet("GetAMovieAccordingToID/{id}")]
         public Movie GetAMovieAccordingToID(int id)
         {
             return _userService.GetAMovieAccordingToID(id);
         }
-
-        [HttpGet("GetAllStars")]
-        public List<Star> getAllStars()
-        {
-            return _userService.getAllStars();
-        }
-
+        [Authorize(Roles = "User")]
         [HttpGet("GetStarByMovieID/{movie_id}")]
-        public Star GetStarByMovieID(int movie_id)
+        public List<Person> GetStarByMovieID(int movie_id)
         {
             return _userService.GetStarByMovieID(movie_id);
         }
-
-        [HttpGet("GetStarByPersonID/{id}")]
-        public Star GetStarByPersonID(int id)
-        {
-            return _userService.GetStarByPersonID(id);
-        }
-
-        [HttpGet("GetAllDirectors")]
-        public List<Director> GetAllDirectors()
-        {
-            return _userService.GetAllDirectors();
-        }
-
+        [Authorize(Roles = "User")]
         [HttpGet("GetDirectorByMovieID/{id}")]
-        public Director GetDirectorByMovieID(int id)
+        public List<Person> GetDirectorByMovieID(int id)
         {
             return _userService.GetDirectorByMovieID(id);
         }
-
-        [HttpGet("GetDirectorByPersonID/{id}")]
-        public Director GetDirectorByPersonID(int id)
-        {
-            return _userService.GetDirectorByPersonID(id);
-        }
-
-        [HttpGet("GetAllRatings")]
-        public List<Ratings> GetAllRatings()
-        {
-            return _userService.GetAllRatings();
-        }
-
+        [Authorize(Roles = "User")]
         [HttpGet("GetRatingByMovieID/{id}")]
         public Ratings GetRatingByMovieID(int id)
         {
             return _userService.GetRatingByMovieID(id);
         }
 
-        [HttpGet("GetAllPeople")]
-        public List<Person> GetAllPeople()
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public IActionResult Register([FromBody] RegisterModel model)
         {
-            return _userService.GetAllPeople();
+            var user = _mapper.Map<User>(model);
+            try
+            {
+                //create user
+                _userService.CreateAccount(user, model.Password);
+                return Ok();
+            }
+            catch (AppException ex)
+            {
+                // return error if something went wrong with the registration
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
-        [HttpGet("GetPersonByID/{id}")]
-        public Person GetPersonByID(int id)
+        [AllowAnonymous]
+        [HttpPost("Login")]
+        public IActionResult Login([FromBody] LoginUser model)
         {
-            return _userService.GetPersonByID(id);
+            var user = _userService.Login(model.Username, model.Password);
+
+            if (user == null)
+                return BadRequest(new { message = "Username or password is incorrect" });
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Name, user.Id.ToString()),
+                    new Claim(ClaimTypes.Role, user.Role)
+                }),
+                Expires = DateTime.UtcNow.AddHours(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
+
+            return Ok(new
+            {
+                userID = user.Id,
+                username = user.Username,
+                Token = tokenString
+            });
         }
 
-        [HttpGet("GetPersonByName/{name}")]
-        public Person GetPersonByName(string name)
-        {
-            return _userService.GetPersonByName(name);
-        }
-
-        [HttpGet("test")]
-        public IActionResult TestingThisMF()
-        {
-            return Ok(new String("IS THIS WORKING?"));
-        }
     }
 }

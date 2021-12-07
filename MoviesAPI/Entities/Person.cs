@@ -11,7 +11,7 @@ namespace MoviesAPI.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Birth { get; set; }
+        public decimal? Birth { get; set; }
     }
 }
 
