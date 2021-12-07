@@ -18,6 +18,7 @@ using MoviesAPI.Services;
 
 namespace MoviesAPI.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class MoviesController : ControllerBase
@@ -32,25 +33,21 @@ namespace MoviesAPI.Controllers
             _appSettings = appSettings.Value;
             _mapper = mapper;
         }
-        [Authorize(Roles = "User")]
         [HttpGet("GetAMovieAccordingToID/{id}")]
         public Movie GetAMovieAccordingToID(int id)
         {
             return _userService.GetAMovieAccordingToID(id);
         }
-        [Authorize(Roles = "User")]
         [HttpGet("GetStarByMovieID/{movie_id}")]
         public List<Person> GetStarByMovieID(int movie_id)
         {
             return _userService.GetStarByMovieID(movie_id);
         }
-        [Authorize(Roles = "User")]
         [HttpGet("GetDirectorByMovieID/{id}")]
         public List<Person> GetDirectorByMovieID(int id)
         {
             return _userService.GetDirectorByMovieID(id);
         }
-        [Authorize(Roles = "User")]
         [HttpGet("GetRatingByMovieID/{id}")]
         public Ratings GetRatingByMovieID(int id)
         {
@@ -90,8 +87,7 @@ namespace MoviesAPI.Controllers
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString()),
-                    new Claim(ClaimTypes.Role, user.Role)
+                    new Claim(ClaimTypes.Name, user.Id.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),

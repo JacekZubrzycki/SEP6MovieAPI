@@ -74,7 +74,6 @@ namespace MoviesAPI.Services
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
-            user.Role = "User";
 
             _context.users.Add(user);
             _context.SaveChanges();
