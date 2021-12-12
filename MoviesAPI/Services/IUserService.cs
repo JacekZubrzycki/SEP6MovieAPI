@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using MoviesAPI.Entities;
 using MoviesAPI.Models;
 
 namespace MoviesAPI.Services
@@ -7,7 +9,7 @@ namespace MoviesAPI.Services
     public interface IUserService
     {
         //List<Movie> GetAllMovies();
-        Movie GetAMovieAccordingToID(int id);
+        MoviesDetailed GetAMovieAccordingToID(int id);
 
         //List<Star> getAllStars();
         List<Person> GetStarByMovieID(int movie_id);
@@ -26,5 +28,14 @@ namespace MoviesAPI.Services
         User Login(string username, string password);
         User CreateAccount(User user, string password);
         User GetById(int id);
+        List<Movie> SearchByName(string title);
+        List<Movie> GetTopTierList(int userId);
+        int AddMovieToTierlist(int movie_id, int userId);
+        int RemoveMovieFromTierlist(int movie_id, int userId);
+        Task<object> StarRatingOfAllMoviesAsync(int star_id);
+
+        Task<object> CompareMoviesByDecades(int year);
+
+        List<Movie> ReturnTopNumberOfMovies(int numOfMovies);
     }
 }

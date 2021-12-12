@@ -25,6 +25,10 @@ namespace MoviesAPI.Helpers
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Director>().ToTable("directors", t => t.ExcludeFromMigrations());
+            modelBuilder.Entity<Toplists>(eb => {
+            eb.HasNoKey();
+            eb.Property(v => v.user_id).HasColumnName("user_id");
+            });
         }
 
         public DbSet<Director> directors { get; set; }
@@ -33,5 +37,7 @@ namespace MoviesAPI.Helpers
         public DbSet<Ratings> ratings { get; set; }
         public DbSet<Star> stars { get; set; }
         public DbSet<User> users { get; set; }
+
+        public DbSet<Toplists> toplists { get; set; }
     }
 }
