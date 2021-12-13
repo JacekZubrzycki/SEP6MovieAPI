@@ -114,7 +114,7 @@ namespace MoviesAPI.Controllers
             var claimsIdentity = this.User.Identity as ClaimsIdentity;
             var userId = claimsIdentity?.FindFirst(ClaimTypes.Name)?.Value;
             if (userId == null) return BadRequest(new { message = "User is not logged in or something else went wrong." });
-            int responseCode = _userService.RemoveMovieFromTierlist(movie.Id, int.Parse(userId));
+            var responseCode = _userService.RemoveMovieFromTierlist(movie.Id, int.Parse(userId));
             switch (responseCode)
             {
                 case 0:
@@ -124,6 +124,32 @@ namespace MoviesAPI.Controllers
                 default:
                     return Ok();
             }
+        }
+        [HttpGet("ReturnNumberOfStars")]
+        public IActionResult ReturnNumberOfStars(int numOfStars)
+        {
+            var claimsIdentity = this.User.Identity as ClaimsIdentity;
+            try
+            {
+                var userId = claimsIdentity?.FindFirst(ClaimTypes.Name)?.Value;
+                if (userId != null)
+                {
+                    var listOfStars = _userService.ReturnNumberOfStars(numOfStars);
+                    return Ok(listOfStars);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return BadRequest();
+            }
+            return BadRequest();
+        }
+
+        [HttpGet("ReturnNumberOfStarsByName")]
+        public List<Person> ReturnNumberOfStarsByName(string name)
+        {
+            return _userService.SearchStarsByName(name);
         }
 
         [HttpGet("StarRatingOfAllMovies")]

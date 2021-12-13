@@ -265,5 +265,27 @@ namespace MoviesAPI.Services
                                    }).Take(numOfMovies).ToList();
             return listOfMovies;
         }
+
+        public List<Person> ReturnNumberOfStars(int numOfStars)
+        {
+            var returnStars = (from stars in _context.stars
+                join people in _context.people on stars.Person_id equals people.Id
+                orderby stars.Person_id descending
+                select new Person
+                {
+                    Id = stars.Person_id,
+                    Name = people.Name,
+                    Birth = people.Birth
+                }).Take(numOfStars).ToList<Person>();
+
+            return returnStars;
+        }
+
+        public List<Person> SearchStarsByName(string name)
+        {
+            var persons = _context.people.Where(p => p.Name.Contains(name)).ToList();
+
+            return persons;
+        }
     }
 }

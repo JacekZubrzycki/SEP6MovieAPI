@@ -37,5 +37,7 @@ namespace MoviesAPI.Services
         Task<object> CompareMoviesByDecades(int year);
 
         List<Movie> ReturnTopNumberOfMovies(int numOfMovies);
+        List<Person> ReturnNumberOfStars(int numOfStars);
+        List<Person> SearchStarsByName(string name);
     }
 }
